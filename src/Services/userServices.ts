@@ -51,5 +51,5 @@ export async function Login({ email , password }:LoginParams) {
 
 
 function GenerateJWT(data: any){
-    return jwt.sign(data , "SDFdsfislkj222340928sdfiWDSF")
+    return jwt.sign(data , process.env.JWT_SECRET || "")
 }

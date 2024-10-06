@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express"
 import mongoose, { mongo } from "mongoose"
 import userRouter from "./routers/userRoutes";
@@ -5,6 +6,7 @@ import productRoute from "./routers/productRoutes";
 import cartRoute from "./routers/cartRoutes";
 import { seedProucts } from "./Services/productServices";
 
+dotenv.config();
 const app = express();
 const port = 3001;
 
@@ -13,7 +15,7 @@ app.use(express.json());
 
 async function connectToMongo(){
     try{
-        await mongoose.connect("mongodb://localhost:27017/ecommerce");
+        await mongoose.connect(process.env.DATABASE_URL || "");
         console.log("connected!");
     }
     catch(error){
@@ -23,8 +25,8 @@ async function connectToMongo(){
 connectToMongo();
 seedProucts();
 
-app.use("/users" , userRouter);
-app.use("/products" , productRoute);
+app.use("/user" , userRouter);
+app.use("/product" , productRoute);
 app.use("/cart" , cartRoute);
 
 app.listen(port , () => {

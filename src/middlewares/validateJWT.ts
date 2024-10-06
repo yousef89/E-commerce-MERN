@@ -24,7 +24,7 @@ async function validateJWT(requset: ExtendRequest , response: Response , next: N
     }
 
 
-    jwt.verify(token , "SDFdsfislkj222340928sdfiWDSF" , async (error , payload) =>{
+    jwt.verify(token , process.env.JWT_SECRET || "" , async (error , payload) =>{
         if(error){
             response.status(403).send("invalid token");
             return;

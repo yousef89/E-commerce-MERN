@@ -6,7 +6,8 @@ export async function getAllProducts(){
 
 
 export async function seedProucts(){
-    const products = [{title: "Dell laptop" , image: "https://m.media-amazon.com/images/I/51if47n2aPL._AC_SL1000_.jpg" , price: 12000 , stock: 10}];
+    try{
+        const products = [{title: "Dell laptop" , image: "https://m.media-amazon.com/images/I/51if47n2aPL._AC_SL1000_.jpg" , price: 12000 , stock: 10}];
 
     const existingProducts = await getAllProducts();
 
@@ -14,4 +15,8 @@ export async function seedProucts(){
     if(existingProducts.length === 0){
         await productModel.insertMany(products);
     }
+    }catch(error){
+        console.log("cannot see the database" , error);
+    }
+    
 }
