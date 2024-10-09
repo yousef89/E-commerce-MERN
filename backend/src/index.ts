@@ -5,6 +5,7 @@ import userRouter from "./routers/userRoutes";
 import productRoute from "./routers/productRoutes";
 import cartRoute from "./routers/cartRoutes";
 import { seedProucts } from "./Services/productServices";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ const port = 3001;
 
 
 app.use(express.json());
+app.use(cors());
 
 async function connectToMongo(){
     try{
