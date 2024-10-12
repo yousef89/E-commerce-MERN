@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/userContext";
+import { useAuth } from "../context/authContext";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -12,7 +12,7 @@ export default function Register() {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
-  const {login} = useAuth();
+  const { login } = useAuth();
 
   async function handleRegister() {
     try {
@@ -47,7 +47,7 @@ export default function Register() {
       }
       setErrorMessage("");
       const data = await response.json();
-      login(email , data );
+      login(email, data);
       setTimeout(() => {
         navigate("/login");
       }, 2000);

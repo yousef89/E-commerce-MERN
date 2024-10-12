@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/userContext";
+import { useAuth } from "../context/authContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,11 +9,11 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  function goToRegister(){
+  function goToRegister() {
     navigate("/register");
   }
-  
-  const {login} = useAuth();
+
+  const { login } = useAuth();
 
   async function handleLogin() {
     try {
@@ -45,7 +45,7 @@ export default function Login() {
       }
       setErrorMessage("");
       const data = await response.json();
-      login(email , data );
+      login(email, data);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -82,7 +82,9 @@ export default function Login() {
           Login
         </button>
       </div>
-      <h2 className="pt-3 cursor-pointer" onClick={goToRegister} >dont have an account?</h2>
+      <h2 className="pt-3 cursor-pointer" onClick={goToRegister}>
+        dont have an account?
+      </h2>
       {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );
