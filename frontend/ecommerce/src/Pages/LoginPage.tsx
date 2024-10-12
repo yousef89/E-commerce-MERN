@@ -8,6 +8,10 @@ export default function Login() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  function goToRegister(){
+    navigate("/register");
+  }
   
   const {login} = useAuth();
 
@@ -78,6 +82,7 @@ export default function Login() {
           Login
         </button>
       </div>
+      <h2 className="pt-3 cursor-pointer" onClick={goToRegister} >dont have an account?</h2>
       {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );

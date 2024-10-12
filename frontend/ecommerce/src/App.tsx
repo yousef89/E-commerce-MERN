@@ -4,6 +4,8 @@ import NavBar from "./components/NavBar";
 import RegisterPage from "./Pages/RegisterPage";
 import Login from "./Pages/LoginPage";
 import AuthProvider from "./context/userContext";
+import CartPage from "./Pages/CartPage";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {
   return (
@@ -12,9 +14,14 @@ function App() {
         <BrowserRouter>
           <NavBar></NavBar>
           <Routes>
-            <Route path="/" element={<HomePage></HomePage>} />
+            <Route element={<ProtectedRoutes></ProtectedRoutes>}>
+              <Route path="/" element={<HomePage></HomePage>} />
+            </Route>
             <Route path="/register" element={<RegisterPage></RegisterPage>} />
             <Route path="/login" element={<Login></Login>}></Route>
+            <Route element={<ProtectedRoutes></ProtectedRoutes>}>
+              <Route path="/cart" element={<CartPage></CartPage>}></Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -1,18 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/userContext";
 import NavBarIcon from "../SVGs/NavBarIcon";
+import ShoppingCartIcon from "../SVGs/ShoppingCartIcon";
 
 export default function NavBar() {
-  const { email, token , logout } = useAuth();
+  const { email, token, logout } = useAuth();
   const navigate = useNavigate();
 
   function handleLogin() {
     navigate("/login");
   }
 
-  function handleLogout(){
+  function handleLogout() {
     logout();
     navigate("/login");
+  }
+
+  function handleCart(){
+    navigate("/cart");
   }
   return (
     <div className="w-[100%] bg-blue-500 flex shadow-xl items-center mb-10">
@@ -22,8 +27,14 @@ export default function NavBar() {
       </div>
       {token ? (
         <div className="flex ml-auto gap-x-5 items-center">
+          <ShoppingCartIcon onClick={handleCart} className="size-7 cursor-pointer text-white hover:text-slate-300 transition" />
           <h2 className="">{email}</h2>
-          <button onClick={handleLogout} className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg">logout</button>
+          <button
+            onClick={handleLogout}
+            className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg"
+          >
+            logout
+          </button>
         </div>
       ) : (
         <button

@@ -4,15 +4,15 @@ export default function NavBarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <div>
       <svg
-        fill="#000000"
+        fill="#ffffff"
         version="1.1"
         id="Capa_1"
         xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink" // Use camelCase
+        xmlnsXlink="http://www.w3.org/1999/xlink"
         width="800px"
         height="800px"
         viewBox="0 0 94.504 94.504"
-        xmlSpace="preserve" // Use camelCase
+        xmlSpace="preserve"
         className={props.className}
       >
         <g>
