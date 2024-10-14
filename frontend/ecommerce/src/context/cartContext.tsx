@@ -56,7 +56,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
       const cart = await response.json();
 
-      const cartMap = cart.items.map(({ product, quantity }: any) => ({
+      const cartMap = cart.items.map(({ product, quantity }: {product: any; quantity: number}) => ({
         productId: product._id,
         title: product.title,
         productImage: product.image,

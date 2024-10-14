@@ -30,7 +30,7 @@ export default function CartPage() {
   //   fetchData();
   // }, []);
 
-  console.log(cartItems , totalAmount);
+  console.log("cart items: " , cartItems ,"total amount: ", totalAmount);
 
   return <div>My Cart</div>;
 }
