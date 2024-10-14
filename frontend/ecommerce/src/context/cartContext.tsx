@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { useAuth } from "./authContext";
 
 interface CartItemsType {
   productId: string;
@@ -29,11 +30,44 @@ interface CartProviderType {
 }
 
 export default function CartProvider({ children }: CartProviderType) {
+  const {token} = useAuth();
   const [cartItems, setCartItems] = useState<CartItemsType[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [error, setError] = useState("");
 
-  function addToCart(productId: string) {
-    console.log(productId);
+  async function addToCart(productId: string) {
+    try {
+      const response = await fetch("http://localhost:3001/cart/items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          productId,
+          quantity: 1,
+        }),
+      });
+
+      if (!response.ok) {
+        setError("faild to add to cart!");
+        return;
+      }
+
+      const cart = await response.json();
+
+      const cartMap = cart.items.map(({ product, quantity }: any) => ({
+        productId: product._id,
+        title: product.title,
+        productImage: product.image,
+        quantity,
+        unitPrice: product.unitPrice,
+      }));
+
+      setCartItems([...cartMap])
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

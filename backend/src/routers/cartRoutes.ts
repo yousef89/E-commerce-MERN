@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/",validateJWT ,async (request:ExtendRequest , response) =>{
     try{
         const userId = request?.user?._id;
-        const cart = await getActiveCartForUser({userId});
+        const cart = await getActiveCartForUser({userId , populateProduct: true});
         response.status(200).send(cart);
     }catch(error){
         response.status(500).send("something went wrong!");
