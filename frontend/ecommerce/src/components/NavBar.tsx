@@ -19,9 +19,15 @@ export default function NavBar() {
   function handleCart() {
     navigate("/cart");
   }
+
+  function handleHome(){
+    navigate("/");
+  }
+
+
   return (
     <div className="w-[100%] bg-blue-500 flex shadow-xl items-center mb-10">
-      <div className="flex items-center ml-6 py-4 gap-x-4">
+      <div onClick={handleHome} className="flex items-center ml-6 py-4 gap-x-4 cursor-pointer">
         <NavBarIcon className="size-10"></NavBarIcon>
         <div className="text-xl font-mono">Tech Hub</div>
       </div>
