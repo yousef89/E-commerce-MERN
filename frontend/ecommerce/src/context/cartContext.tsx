@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { useAuth } from "./authContext";
 
 interface CartItemsType {
@@ -30,10 +36,45 @@ interface CartProviderType {
 }
 
 export default function CartProvider({ children }: CartProviderType) {
-  const {token} = useAuth();
+  const { token } = useAuth();
   const [cartItems, setCartItems] = useState<CartItemsType[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!token) {
+      setError("token is not valid!");
+      console.log(error);
+      return;
+    }
+    async function fetchData() {
+      const response = await fetch("http://localhost:3001/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        setError("data didnt fetch, something went wrong!");
+        console.log(error);
+        return;
+      }
+      const data = await response.json();
+
+      const cartMap = data.items.map(
+        ({ product, quantity }: { product: any; quantity: number }) => ({
+          productId: product._id,
+          title: product.title,
+          productImage: product.image,
+          quantity,
+          unitPrice: product.price,
+        })
+      );
+
+      setCartItems(cartMap);
+      setTotalAmount(data.totalAmount);
+    }
+    fetchData();
+  }, []);
 
   async function addToCart(productId: string) {
     try {
@@ -41,7 +82,7 @@ export default function CartProvider({ children }: CartProviderType) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           productId,
@@ -56,15 +97,10 @@ export default function CartProvider({ children }: CartProviderType) {
 
       const cart = await response.json();
 
-      const cartMap = cart.items.map(({ product, quantity }: {product: any; quantity: number}) => ({
-        productId: product._id,
-        title: product.title,
-        productImage: product.image,
-        quantity,
-        unitPrice: product.unitPrice,
-      }));
+      console.log(cart);
+      
 
-      setCartItems([...cartMap])
+
     } catch (error) {
       console.log(error);
     }

@@ -1,36 +1,34 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../context/authContext";
 import { useCart } from "../context/cartContext";
+import DeleteButton from "../SVGs/deleteButton";
 
 export default function CartPage() {
-  const { token } = useAuth();
-  const {cartItems , totalAmount} = useCart();
-  const [error, setError] = useState("");
+  const { cartItems, totalAmount } = useCart();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     setError("token is not valid!");
-  //     console.log(error);
-  //     return;
-  //   }
-  //   async function fetchData() {
-  //     const response = await fetch("http://localhost:3001/cart", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     if (!response.ok) {
-  //       setError("data didnt fetch, something went wrong!");
-  //       console.log(error);
-  //       return;
-  //     }
-  //     const data = await response.json();
-  //     setCart(data);
-  //   }
-  //   fetchData();
-  // }, []);
+  console.log("cart items: ", cartItems, "total amount: ", totalAmount);
 
-  console.log("cart items: " , cartItems ,"total amount: ", totalAmount);
-
-  return <div>My Cart</div>;
+  return (
+    <div className="flex flex-col justify-center items-center gap-10">
+      {cartItems.map((item) => (
+        <div className="border-2 rounded-lg w-[50%] px-10 py-4 flex items-center ">
+          <img src={item.productImage} className="size-32"></img>
+          <div className="flex flex-col pl-5">
+            <h2 className="text-[20px]">{item.title}</h2>
+            <h3>1 x {item.unitPrice} EGP</h3>
+          </div>
+          <div className="flex ml-auto gap-2">
+            <button className=" h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md ">
+              -
+            </button>
+            <button className=" h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md ">
+              +
+            </button>
+            <DeleteButton className="w-6 h-6" fill="#fa2e2e"></DeleteButton>
+          </div>
+        </div>
+      ))}
+      <div className="w-[50%] pl-5">
+        <h1 className="mr-auto text-[20px]">Total Amount: {totalAmount} EGP</h1>
+      </div>
+    </div>
+  );
 }
