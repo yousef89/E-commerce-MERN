@@ -19,12 +19,14 @@ interface CartType {
   cartItems: CartItemsType[];
   totalAmount: number;
   addToCart: (productId: string) => void;
+  updateCart: (productId: string , quantity: number) => void;
 }
 
 const cartContext = createContext<CartType>({
   cartItems: [],
   totalAmount: 0,
   addToCart: () => {},
+  updateCart: () => {}
 });
 
 export function useCart() {
@@ -106,8 +108,50 @@ export default function CartProvider({ children }: CartProviderType) {
     }
   }
 
+
+  async function updateCart(productId: string , quantity: number) {
+    try {
+      const response = await fetch("http://localhost:3001/cart/items", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          productId,
+          quantity,
+        }),
+      });
+
+      if (!response.ok) {
+        setError("faild to update to cart!");
+        return;
+      }
+
+      const cart = await response.json();
+      const cartMap = cart.items.map(
+        ({ product, quantity }: { product: any; quantity: number }) => ({
+          productId: product._id,
+          title: product.title,
+          productImage: product.image,
+          quantity,
+          unitPrice: product.price,
+        })
+      );
+
+      setCartItems(cartMap);
+      setTotalAmount(cart.totalAmount);
+
+      console.log(cart);
+      
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
-    <cartContext.Provider value={{ cartItems, totalAmount, addToCart }}>
+    <cartContext.Provider value={{ cartItems, totalAmount, addToCart , updateCart }}>
       {children}
     </cartContext.Provider>
   );
