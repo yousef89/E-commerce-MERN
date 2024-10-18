@@ -20,7 +20,7 @@ export default function CartPage() {
   const navigate = useNavigate();
 
   function handleCheckout(){
-    navigate('/ckeckout');
+    navigate('/checkout');
   }
 
   function handleQuantity(productId: string, quantity: number) {

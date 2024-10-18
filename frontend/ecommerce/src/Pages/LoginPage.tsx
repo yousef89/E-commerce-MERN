@@ -46,7 +46,9 @@ export default function Login() {
       setErrorMessage("");
       const data = await response.json();
       login(email, data);
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 600);
     } catch (error) {
       console.log(error);
       setErrorMessage("Something went wrong while logining!");

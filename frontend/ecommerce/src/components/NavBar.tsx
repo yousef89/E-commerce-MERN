@@ -24,6 +24,10 @@ export default function NavBar() {
     navigate("/");
   }
 
+  function handleOrders(){
+    navigate("/my-orders");
+  }
+
 
   return (
     <div className="w-[100%] bg-blue-500 flex shadow-xl items-center mb-10">
@@ -38,6 +42,7 @@ export default function NavBar() {
             className="size-7 cursor-pointer text-white hover:text-slate-300 transition"
           />
           <h2 className="">{email}</h2>
+          <button onClick={handleOrders} className="bg-white ml-auto px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg">My orders</button>
           <button
             onClick={handleLogout}
             className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg"
