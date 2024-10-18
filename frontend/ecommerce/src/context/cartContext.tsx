@@ -20,13 +20,19 @@ interface CartType {
   totalAmount: number;
   addToCart: (productId: string) => void;
   updateCart: (productId: string , quantity: number) => void;
+  removeItem: (productId: string) => void;
+  fetchData: () => void;
+  clearItems: () => void;
 }
 
 const cartContext = createContext<CartType>({
   cartItems: [],
   totalAmount: 0,
   addToCart: () => {},
-  updateCart: () => {}
+  updateCart: () => {},
+  removeItem: () => {},
+  fetchData: () => {},
+  clearItems: () => {}
 });
 
 export function useCart() {
@@ -43,37 +49,40 @@ export default function CartProvider({ children }: CartProviderType) {
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState("");
 
+
+  async function fetchData() {
+    const response = await fetch("http://localhost:3001/cart", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      setError("data didnt fetch, something went wrong!");
+      console.log(error);
+      return;
+    }
+    const data = await response.json();
+
+    const cartMap = data.items.map(
+      ({ product, quantity }: { product: any; quantity: number }) => ({
+        productId: product._id,
+        title: product.title,
+        productImage: product.image,
+        quantity,
+        unitPrice: product.price,
+      })
+    );
+
+    setCartItems(cartMap);
+    setTotalAmount(data.totalAmount);
+  }
+
+  
   useEffect(() => {
     if (!token) {
       setError("token is not valid!");
       console.log(error);
       return;
-    }
-    async function fetchData() {
-      const response = await fetch("http://localhost:3001/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        setError("data didnt fetch, something went wrong!");
-        console.log(error);
-        return;
-      }
-      const data = await response.json();
-
-      const cartMap = data.items.map(
-        ({ product, quantity }: { product: any; quantity: number }) => ({
-          productId: product._id,
-          title: product.title,
-          productImage: product.image,
-          quantity,
-          unitPrice: product.price,
-        })
-      );
-
-      setCartItems(cartMap);
-      setTotalAmount(data.totalAmount);
     }
     fetchData();
   }, []);
@@ -150,8 +159,67 @@ export default function CartProvider({ children }: CartProviderType) {
       console.log(error);
     }
   }
+
+  async function removeItem(productId: string) {
+    try {
+      const response = await fetch(`http://localhost:3001/cart/items/${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        setError("faild to delete item from cart!");
+        return;
+      }
+
+      const cart = await response.json();
+      const cartMap = cart.items.map(
+        ({ product, quantity }: { product: any; quantity: number }) => ({
+          productId: product._id,
+          title: product.title,
+          productImage: product.image,
+          quantity,
+          unitPrice: product.price,
+        })
+      );
+
+      setCartItems(cartMap);
+      setTotalAmount(cart.totalAmount);
+
+      console.log(cart);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function clearItems() {
+    try {
+      const response = await fetch(`http://localhost:3001/cart`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        setError("faild to delete item from cart!");
+        return;
+      }
+
+      setCartItems([]);
+      setTotalAmount(0);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
-    <cartContext.Provider value={{ cartItems, totalAmount, addToCart , updateCart }}>
+    <cartContext.Provider value={{ cartItems, totalAmount, addToCart , updateCart , removeItem , fetchData ,clearItems}}>
       {children}
     </cartContext.Provider>
   );
