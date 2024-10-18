@@ -1,14 +1,27 @@
 import { useEffect } from "react";
 import { useCart } from "../context/cartContext";
 import DeleteButton from "../SVGs/deleteButton";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
-  const { cartItems, totalAmount, updateCart, removeItem, fetchData , clearItems} =
-    useCart();
+  const {
+    cartItems,
+    totalAmount,
+    updateCart,
+    removeItem,
+    fetchData,
+    clearItems,
+  } = useCart();
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const navigate = useNavigate();
+
+  function handleCheckout(){
+    navigate('/ckeckout');
+  }
 
   function handleQuantity(productId: string, quantity: number) {
     if (quantity > 0) {
@@ -18,10 +31,6 @@ export default function CartPage() {
 
   function handleRemoveItem(productId: string) {
     removeItem(productId);
-  }
-
-  function handleClearItems(){
-    clearItems();
   }
 
   console.log("cart items: ", cartItems, "total amount: ", totalAmount);
@@ -63,11 +72,19 @@ export default function CartPage() {
           <h1 className="mr-auto text-[20px]">
             Total Amount: {totalAmount} EGP
           </h1>
-          <button onClick={clearItems} className="text-white px-2 bg-red-600 rounded-lg mr-5">
-            Clear items
-          </button>
+          <div className="flex gap-1">
+            <button onClick={handleCheckout} className="text-white px-2 bg-blue-500 rounded-lg mr-5">
+              Check out
+            </button>
+            <button
+              onClick={clearItems}
+              className="text-white px-2 bg-red-600 rounded-lg mr-5"
+            >
+              Clear items
+            </button>
+          </div>
         </div>
-      ): (
+      ) : (
         <h1 className="text-[20px]">Cart is empty, please add items.</h1>
       )}
     </div>
