@@ -46,9 +46,7 @@ export default function Login() {
       setErrorMessage("");
       const data = await response.json();
       login(email, data);
-      setTimeout(() => {
-        navigate("/");
-      }, 600);
+      navigate("/")
     } catch (error) {
       console.log(error);
       setErrorMessage("Something went wrong while logining!");
@@ -84,7 +82,7 @@ export default function Login() {
           Login
         </button>
       </div>
-      <h2 className="pt-3 cursor-pointer" onClick={goToRegister}>
+      <h2 className="pt-3 cursor-pointer hover:text-blue-600 transition" onClick={goToRegister}>
         dont have an account?
       </h2>
       {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}

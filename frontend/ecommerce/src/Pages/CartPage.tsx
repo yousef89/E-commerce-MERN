@@ -36,11 +36,11 @@ export default function CartPage() {
   console.log("cart items: ", cartItems, "total amount: ", totalAmount);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10">
+    <div className="flex flex-col justify-center items-center gap-10 pb-20">
       <h1 className="text-[40px]">my Cart</h1>
       {cartItems.map((item) => (
-        <div className="border-2 rounded-lg w-[50%] px-10 py-4 flex items-center ">
-          <img src={item.productImage} className="size-32"></img>
+        <div className="border-2 rounded-lg w-[50%] px-10 py-4 flex items-center hover:bg-slate-100 transition">
+          <img src={item.productImage} className="w-32"></img>
           <div className="flex flex-col pl-5">
             <h2 className="text-[20px]">{item.title}</h2>
             <h3>
@@ -50,13 +50,13 @@ export default function CartPage() {
           <div className="flex ml-auto gap-2">
             <button
               onClick={() => handleQuantity(item.productId, item.quantity - 1)}
-              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md "
+              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md hover:bg-blue-600 transition"
             >
               -
             </button>
             <button
               onClick={() => handleQuantity(item.productId, item.quantity + 1)}
-              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md "
+              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md hover:bg-blue-600 transition"
             >
               +
             </button>
@@ -73,12 +73,12 @@ export default function CartPage() {
             Total Amount: {totalAmount} EGP
           </h1>
           <div className="flex gap-1">
-            <button onClick={handleCheckout} className="text-white px-2 bg-blue-500 rounded-lg mr-5">
+            <button onClick={handleCheckout} className="text-white px-2 bg-blue-500 rounded-lg mr-5 hover:bg-blue-600 transition">
               Check out
             </button>
             <button
               onClick={clearItems}
-              className="text-white px-2 bg-red-600 rounded-lg mr-5"
+              className="text-white px-2 bg-red-600 rounded-lg mr-5 hover:bg-red-700 transition"
             >
               Clear items
             </button>

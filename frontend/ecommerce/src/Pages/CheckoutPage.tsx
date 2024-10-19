@@ -53,12 +53,12 @@ export default function CheckOutPage() {
   }
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10">
+    <div className=" flex flex-col justify-center items-center gap-10 pb-20">
       <h1 className="text-[40px]">Check out</h1>
-      <div className="border rounded-xl w-[40%]">
+      <div className="border rounded-xl w-[40%] hover:bg-slate-100 transition">
         {cartItems.map((item) => (
           <div className=" w-[100%] px-10 py-4 flex items-center ">
-            <img src={item.productImage} className="size-32"></img>
+            <img src={item.productImage} className="w-28"></img>
             <h2 className="text-[20px] pl-5">{item.title}</h2>
             <div className="flex items-center ml-auto pr-4">
               <h3>
@@ -80,7 +80,7 @@ export default function CheckOutPage() {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
-        <button onClick={handlePayment} className="text-white text-[20px] w-[90px] h-[30px] bg-blue-600 rounded-lg">Pay now</button>
+        <button onClick={handlePayment} className="text-white text-[20px] w-[90px] h-[30px] bg-blue-500 rounded-lg hover:bg-blue-600 transition">Pay now</button>
         {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );

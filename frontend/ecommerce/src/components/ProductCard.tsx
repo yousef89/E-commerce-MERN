@@ -5,9 +5,9 @@ export default function ProductCard({ _id , title, price, stock, image }: Produc
 
   const {addToCart} = useCart();
   return (
-    <div className=" shadow-md px-4 flex flex-col justify-center items-center">
-      <img src={image} className="w-40"></img>
-      <div className="mr-auto mb-4 ml-4">
+    <div className=" shadow-md px-4 flex flex-col justify-center items-center hover:bg-slate-100 transition">
+      <img src={image} className="w-40 mt-auto"></img>
+      <div className="mr-auto mb-4 ml-4 mt-auto">
         <h1 className="text-[30px] pb-2">{title}</h1>
         <h3>{price} EGP</h3>
         <h3 className="pb-2">available: {stock}</h3>

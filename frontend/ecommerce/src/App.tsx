@@ -10,31 +10,32 @@ import CartProvider from "./context/cartContext";
 import CheckOutPage from "./Pages/CheckoutPage";
 import SuccessPage from "./Pages/SuccessPage";
 import OrdersPage from "./Pages/OrdersPage";
+import LoadingWrapper from "./components/LoadingWrapper";
 
 function App() {
   return (
-    <>
-      <AuthProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <NavBar></NavBar>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <LoadingWrapper>
+          <NavBar />
             <Routes>
-              <Route element={<ProtectedRoutes></ProtectedRoutes>}>
-                <Route path="/" element={<HomePage></HomePage>} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/" element={<HomePage />} />
               </Route>
-              <Route path="/register" element={<RegisterPage></RegisterPage>} />
-              <Route path="/login" element={<Login></Login>}></Route>
-              <Route element={<ProtectedRoutes></ProtectedRoutes>}>
-                <Route path="/cart" element={<CartPage></CartPage>}></Route>
-                <Route path="/checkout" element={<CheckOutPage></CheckOutPage>}></Route>
-                <Route path="/success" element={<SuccessPage></SuccessPage>}></Route>
-                <Route path="/my-orders" element={<OrdersPage></OrdersPage>}></Route>
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckOutPage />} />
+                <Route path="/success" element={<SuccessPage />} />
+                <Route path="/my-orders" element={<OrdersPage />} />
               </Route>
             </Routes>
-          </BrowserRouter>
-        </CartProvider>
-      </AuthProvider>
-    </>
+          </LoadingWrapper>
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
