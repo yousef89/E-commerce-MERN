@@ -14,14 +14,12 @@ const port = process.env.PORT;
 const frontendUrl = process.env.FRONTEND
 
 app.use(express.json());
-const corsOptions = {
 
-  origin: process.env.FRONTEND, // This should match your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: frontendUrl,  // Allow only your frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"],  // Allowed headers
+}));
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
