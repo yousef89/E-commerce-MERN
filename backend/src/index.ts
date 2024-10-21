@@ -17,6 +17,10 @@ app.use(cors());
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
 async function connectToMongo() {
   try {
     await mongoose.connect(process.env.DATABASE_URL || "");
