@@ -3,6 +3,8 @@ import { useCart } from "../context/cartContext";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export default function CheckOutPage() {
   const { cartItems, totalAmount, fetchData } = useCart();
   const [address, setAddress] = useState("");
