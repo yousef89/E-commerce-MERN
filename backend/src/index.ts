@@ -11,9 +11,13 @@ import path from "path";
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
+const frontendUrl = process.env.FRONTEND
 
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: frontendUrl,  // Allow only your frontend URL
+}));
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
