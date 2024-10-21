@@ -1,3 +1,4 @@
+const baseUrl = import.meta.env.VITE_BASE_URL;
 import {
   createContext,
   useContext,
@@ -51,7 +52,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
 
   async function fetchData() {
-    const response = await fetch("http://localhost:3001/cart", {
+    const response = await fetch(`${baseUrl}/cart`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -89,7 +90,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
   async function addToCart(productId: string) {
     try {
-      const response = await fetch("http://localhost:3001/cart/items", {
+      const response = await fetch(`${baseUrl}/cart/items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +121,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
   async function updateCart(productId: string , quantity: number) {
     try {
-      const response = await fetch("http://localhost:3001/cart/items", {
+      const response = await fetch(`${baseUrl}/cart/items`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -162,7 +163,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
   async function removeItem(productId: string) {
     try {
-      const response = await fetch(`http://localhost:3001/cart/items/${productId}`, {
+      const response = await fetch(`${baseUrl}/cart/items/${productId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`
@@ -197,7 +198,7 @@ export default function CartProvider({ children }: CartProviderType) {
 
   async function clearItems() {
     try {
-      const response = await fetch(`http://localhost:3001/cart`, {
+      const response = await fetch(`${baseUrl}/cart`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function OrdersPage() {
   // Define interfaces matching the actual data structure
@@ -24,7 +25,7 @@ export default function OrdersPage() {
   const { token } = useAuth();
 
   async function fetchData() {
-    const response = await fetch("http://localhost:3001/user/my-orders", {
+    const response = await fetch(`${baseUrl}/user/my-orders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

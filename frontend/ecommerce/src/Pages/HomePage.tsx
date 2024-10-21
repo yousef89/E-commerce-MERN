@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Products from "../types/productType";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function HomePage() {
     const [product , setProduct] = useState<Products[]>([]);
@@ -9,7 +10,7 @@ export default function HomePage() {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch("http://localhost:3001/product");
+        const response = await fetch(`${baseUrl}/product`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

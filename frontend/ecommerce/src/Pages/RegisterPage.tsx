@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -23,7 +24,7 @@ export default function Register() {
         }, 3000);
         return;
       }
-      const response = await fetch("http://localhost:3001/user/register", {
+      const response = await fetch(`${baseUrl}/user/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -25,7 +25,7 @@ export default function CheckOutPage() {
         }, 3000);
         return;
       }
-      const response = await fetch("http://localhost:3001/cart/checkout", {
+      const response = await fetch(`${baseUrl}/cart/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
