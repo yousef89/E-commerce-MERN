@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import EmptyCartLogo from "../SVGs/EmptyCart";
+import { toast } from "sonner";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function OrdersPage() {
@@ -22,7 +23,6 @@ export default function OrdersPage() {
 
   // Add the type to the useState hook
   const [orders, setOrders] = useState<Order[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
   const { token } = useAuth();
 
   async function fetchData() {
@@ -35,10 +35,7 @@ export default function OrdersPage() {
     });
 
     if (!response.ok) {
-      setErrorMessage("Something went wrong while fetching orders!");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+      toast.error("Something went wrong while fetching orders", {className:"bg-red-500 text-white border border-red-600"});
       return;
     }
 
