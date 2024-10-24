@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import { toast } from "sonner";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function Register() {
@@ -8,9 +9,6 @@ export default function Register() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [errorMessage, setErrorMessage] = useState("");
-  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
   const { login } = useAuth();
@@ -18,10 +16,7 @@ export default function Register() {
   async function handleRegister() {
     try {
       if (!firstName || !lastName || !email || !password) {
-        setErrorMessage(`please complete missing fields`);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error("please complete missing fields", {className:"bg-red-500 text-white border border-red-600"});
         return;
       }
       const response = await fetch(`${baseUrl}/user/register`, {
@@ -36,33 +31,22 @@ export default function Register() {
           password,
         }),
       });
-      if (response.ok) {
-        setSuccess("account created successfully!");
-      } else {
+      if (!response.ok) {
         const data = await response.json();
-        setErrorMessage(data);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error(data, {className:"bg-red-500 text-white border border-red-600"});
         return;
       }
-      setErrorMessage("");
       const data = await response.json();
       login(email, data);
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+      navigate("/");
     } catch (error) {
       console.log(error);
-      setErrorMessage("Something went wrong while registering!");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+      toast.error("Something went wrong while registering", {className:"bg-red-500 text-white border border-red-600"});
     }
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pt-[8%]">
       <h1 className="text-[40px]">Register new user</h1>
       <div className="flex flex-col items-center justify-center mt-9 w-[200px] gap-y-1">
         <label className="text-[20px]">First Name </label>
@@ -101,8 +85,6 @@ export default function Register() {
           Register
         </button>
       </div>
-      {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
-      {success && <h1 className="text-green-500 mt-2">{success}</h1>}
     </div>
   );
 }

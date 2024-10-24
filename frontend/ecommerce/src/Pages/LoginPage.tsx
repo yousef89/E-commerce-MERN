@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import { toast } from "sonner";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   function goToRegister() {
@@ -19,10 +19,7 @@ export default function Login() {
   async function handleLogin() {
     try {
       if (!email || !password) {
-        setErrorMessage(`please complete missing fields`);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error("please complete missing fields", {className:"bg-red-500 text-white border border-red-600"});
         return;
       }
       const response = await fetch(`${baseUrl}/user/login`, {
@@ -38,27 +35,20 @@ export default function Login() {
 
       if (!response.ok) {
         const data = await response.json();
-        setErrorMessage(data);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error(data, {className:"bg-red-500 text-white border border-red-600"});
         return;
       }
-      setErrorMessage("");
       const data = await response.json();
       login(email, data);
       navigate("/")
     } catch (error) {
       console.log(error);
-      setErrorMessage("Something went wrong while logining!");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+      toast.error("Something went wrong while logining", {className:"bg-red-500 text-white border border-red-600"})
     }
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pt-[10%]">
       <h1 className="text-[40px]">Login to your account</h1>
       <div className="flex flex-col items-center justify-center mt-9 w-[200px] gap-y-1">
         <label className="text-[20px]">Email </label>
@@ -86,7 +76,6 @@ export default function Login() {
       <h2 className="pt-3 cursor-pointer hover:text-blue-600 transition" onClick={goToRegister}>
         dont have an account?
       </h2>
-      {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useCart } from "../context/cartContext";
 import DeleteButton from "../SVGs/deleteButton";
 import { useNavigate } from "react-router-dom";
+import EmptyCartLogo from "../SVGs/EmptyCart";
 
 export default function CartPage() {
   const {
@@ -36,10 +37,9 @@ export default function CartPage() {
   console.log("cart items: ", cartItems, "total amount: ", totalAmount);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 pb-20">
-      <h1 className="text-[40px]">my Cart</h1>
+    <div className="flex flex-col justify-center items-center gap-4 pb-20">
       {cartItems.map((item) => (
-        <div className="border-2 rounded-lg w-[50%] px-10 py-4 flex items-center hover:bg-slate-100 transition">
+        <div className="border-2 rounded-lg w-[50%] px-10  flex items-center bg-white transition min-h-[150px] shadow-sm">
           <img src={item.productImage} className="w-32"></img>
           <div className="flex flex-col pl-5">
             <h2 className="text-[20px]">{item.title}</h2>
@@ -68,11 +68,11 @@ export default function CartPage() {
         </div>
       ))}
       {totalAmount > 0 ? (
-        <div className="w-[50%] pl-5 flex">
-          <h1 className="mr-auto text-[20px]">
+        <div className="w-[51%] pl-5 flex ">
+          <h1 className="mr-auto text-[20px] bg-white rounded-lg px-4 py-4 shadow-md">
             Total Amount: {totalAmount} EGP
           </h1>
-          <div className="flex gap-1">
+          <div className="flex gap-1 max-h-[35px] mt-4">
             <button onClick={handleCheckout} className="text-white px-2 bg-blue-500 rounded-lg mr-5 hover:bg-blue-600 transition">
               Check out
             </button>
@@ -85,7 +85,10 @@ export default function CartPage() {
           </div>
         </div>
       ) : (
-        <h1 className="text-[20px]">Cart is empty, please add items.</h1>
+        <div className="flex flex-col w-[100%] justify-center items-center gap-5 mt-[17%]">
+          <EmptyCartLogo width={100} height={100}></EmptyCartLogo>
+        <h1 className="text-[25px]">Cart is empty, please add items</h1>
+        </div>
       )}
     </div>
   );

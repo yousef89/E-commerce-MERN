@@ -55,11 +55,10 @@ export default function CheckOutPage() {
   }
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10 pb-20">
-      <h1 className="text-[40px]">Check out</h1>
-      <div className="border rounded-xl w-[40%] hover:bg-slate-100 transition">
+    <div className=" flex flex-col justify-center items-center gap-10 pb-20 ">
+      <div className="border-2 rounded-lg w-[40%] ">
         {cartItems.map((item) => (
-          <div className=" w-[100%] px-10 py-4 flex items-center ">
+          <div className=" w-[100%] px-10 py-4 flex items-center bg-white">
             <img src={item.productImage} className="w-28"></img>
             <h2 className="text-[20px] pl-5">{item.title}</h2>
             <div className="flex items-center ml-auto pr-4">

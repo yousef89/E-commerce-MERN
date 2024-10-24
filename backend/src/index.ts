@@ -43,5 +43,5 @@ app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 
 app.listen(port, () => {
-  console.log(`server is running at: http://localhost/${port}`);
+  console.log(`server is running at: http://localhost:${port}`);
 });

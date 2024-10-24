@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 const baseUrl = import.meta.env.VITE_BASE_URL;
 import {
   createContext,
@@ -20,7 +22,7 @@ interface CartType {
   cartItems: CartItemsType[];
   totalAmount: number;
   addToCart: (productId: string) => void;
-  updateCart: (productId: string , quantity: number) => void;
+  updateCart: (productId: string, quantity: number) => void;
   removeItem: (productId: string) => void;
   fetchData: () => void;
   clearItems: () => void;
@@ -33,7 +35,7 @@ const cartContext = createContext<CartType>({
   updateCart: () => {},
   removeItem: () => {},
   fetchData: () => {},
-  clearItems: () => {}
+  clearItems: () => {},
 });
 
 export function useCart() {
@@ -49,7 +51,6 @@ export default function CartProvider({ children }: CartProviderType) {
   const [cartItems, setCartItems] = useState<CartItemsType[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState("");
-
 
   async function fetchData() {
     const response = await fetch(`${baseUrl}/cart`, {
@@ -78,7 +79,6 @@ export default function CartProvider({ children }: CartProviderType) {
     setTotalAmount(data.totalAmount);
   }
 
-  
   useEffect(() => {
     if (!token) {
       setError("token is not valid!");
@@ -103,23 +103,24 @@ export default function CartProvider({ children }: CartProviderType) {
       });
 
       if (!response.ok) {
-        setError("faild to add to cart!");
+        toast.error("Item already exists in cart", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
 
       const cart = await response.json();
-
       console.log(cart);
-      
 
-
+      toast.success("Item added to cart", {
+        className: "bg-green-500 text-white border border-green-600",
+      });
     } catch (error) {
       console.log(error);
     }
   }
 
-
-  async function updateCart(productId: string , quantity: number) {
+  async function updateCart(productId: string, quantity: number) {
     try {
       const response = await fetch(`${baseUrl}/cart/items`, {
         method: "PUT",
@@ -134,7 +135,9 @@ export default function CartProvider({ children }: CartProviderType) {
       });
 
       if (!response.ok) {
-        setError("faild to update to cart!");
+        toast.error("Faild to update to cart", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
 
@@ -153,9 +156,6 @@ export default function CartProvider({ children }: CartProviderType) {
       setTotalAmount(cart.totalAmount);
 
       console.log(cart);
-      
-
-
     } catch (error) {
       console.log(error);
     }
@@ -166,15 +166,19 @@ export default function CartProvider({ children }: CartProviderType) {
       const response = await fetch(`${baseUrl}/cart/items/${productId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) {
-        setError("faild to delete item from cart!");
+        toast.error("Faild to delete item from cart", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
-
+      toast.success("Item has been removed", {
+        className: "bg-green-500 text-white border border-green-600",
+      });
       const cart = await response.json();
       const cartMap = cart.items.map(
         ({ product, quantity }: { product: any; quantity: number }) => ({
@@ -190,7 +194,6 @@ export default function CartProvider({ children }: CartProviderType) {
       setTotalAmount(cart.totalAmount);
 
       console.log(cart);
-
     } catch (error) {
       console.log(error);
     }
@@ -201,26 +204,36 @@ export default function CartProvider({ children }: CartProviderType) {
       const response = await fetch(`${baseUrl}/cart`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) {
-        setError("faild to delete item from cart!");
+        toast.error("Faild to delete item from cart");
         return;
       }
-
+      toast.success("Cart has been cleared", {
+        className: "bg-green-500 text-white border border-green-600",
+      });
       setCartItems([]);
       setTotalAmount(0);
-
     } catch (error) {
       console.log(error);
     }
   }
 
-
   return (
-    <cartContext.Provider value={{ cartItems, totalAmount, addToCart , updateCart , removeItem , fetchData ,clearItems}}>
+    <cartContext.Provider
+      value={{
+        cartItems,
+        totalAmount,
+        addToCart,
+        updateCart,
+        removeItem,
+        fetchData,
+        clearItems,
+      }}
+    >
       {children}
     </cartContext.Provider>
   );

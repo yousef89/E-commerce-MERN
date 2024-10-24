@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
+import EmptyCartLogo from "../SVGs/EmptyCart";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function OrdersPage() {
@@ -51,31 +52,34 @@ export default function OrdersPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5">
-      <h1 className="text-[40px]">My Orders</h1>
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+    <div className="flex flex-col items-center pb-10 ">
 
-      {/* If there are no orders */}
-      {orders.length === 0 && <p>No orders found.</p>}
+      {orders.length === 0 && (
+        <div className="flex flex-col w-[100%] justify-center items-center mt-[17%] gap-5">
+          <EmptyCartLogo width={100} height={100}></EmptyCartLogo>
+          <p className="text-[25px]">Add items to review your orders</p>
+        </div>
+      )}
 
-      {/* Mapping through orders */}
       {orders.map((order) => (
-        <div key={order._id} className="border-2 rounded-lg w-[60%] p-5">
-          <p>Address: {order.address}</p>
-          <p>Total: {order.total} EGP</p>
-
-          <h3 className="font-semibold mt-4">Order Items:</h3>
-          <div className="pl-5">
+        <div
+          key={order._id}
+          className="border-2 rounded-lg w-[40%] p-5 bg-white shadow-md mb-10"
+        >
+          <div className="py-3">
             {order.orderItems.length > 0 ? (
               order.orderItems.map((item) => (
-                <div key={item._id} className="flex items-center gap-5 my-2">
+                <div
+                  key={item._id}
+                  className="flex items-center gap-5 min-h-[100px]"
+                >
                   <img
                     src={item.productImage}
                     alt={item.productTitle}
-                    className="w-16 h-16"
+                    className="w-28"
                   />
-                  <div>
-                    <p>{item.productTitle}</p>
+                  <p className="text-[20px]">{item.productTitle}</p>
+                  <div className="flex items-center gap-5 ml-auto mr-8">
                     <p>
                       {item.quantity} x {item.unitPrice} EGP
                     </p>
@@ -83,8 +87,13 @@ export default function OrdersPage() {
                 </div>
               ))
             ) : (
-              <p>No items in this order.</p>
+              <p>Add items to review your orders.</p>
             )}
+          </div>
+          <hr className="py-3"></hr>
+          <div className="flex flex-col w-[100%]">
+            <p className="text-[20px]">Address: {order.address}</p>
+            <p className="text-[20px]">Total: {order.total} EGP</p>
           </div>
         </div>
       ))}

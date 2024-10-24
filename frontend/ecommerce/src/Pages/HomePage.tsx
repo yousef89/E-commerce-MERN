@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Products from "../types/productType";
+
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function HomePage() {
@@ -23,7 +24,7 @@ export default function HomePage() {
     getProducts();
   }, []);
   return (
-      <div className="grid grid-cols-3 gap-10 m-5">
+      <div className="grid grid-cols-4 gap-10 m-5">
         {product.map((p)=>(
             <ProductCard _id = {p._id} image = {p.image} price = {p.price} stock = {p.stock} title = {p.title}></ProductCard>
         ))}    
