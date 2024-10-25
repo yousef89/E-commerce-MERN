@@ -16,7 +16,9 @@ export default function Register() {
   async function handleRegister() {
     try {
       if (!firstName || !lastName || !email || !password) {
-        toast.error("please complete missing fields", {className:"bg-red-500 text-white border border-red-600"});
+        toast.error("please complete missing fields", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
       const response = await fetch(`${baseUrl}/user/register`, {
@@ -33,7 +35,9 @@ export default function Register() {
       });
       if (!response.ok) {
         const data = await response.json();
-        toast.error(data, {className:"bg-red-500 text-white border border-red-600"});
+        toast.error(data, {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
       const data = await response.json();
@@ -41,49 +45,61 @@ export default function Register() {
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong while registering", {className:"bg-red-500 text-white border border-red-600"});
+      toast.error("Something went wrong while registering", {
+        className: "bg-red-500 text-white border border-red-600",
+      });
     }
   }
 
   return (
     <div className="flex flex-col items-center justify-center pt-[8%]">
-      <h1 className="text-[40px] font-josefin">Register new user</h1>
-      <div className="flex flex-col items-center justify-center mt-9 w-[200px] gap-y-1">
-        <label className="text-[20px] font-josefin font-semibold">First Name </label>
-        <input
-          className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <label className="text-[20px] font-josefin font-semibold">Last Name </label>
-        <input
-          className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <label className="text-[20px] font-josefin font-semibold">Email </label>
-        <input
-          className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label className="text-[20px] font-josefin font-semibold">Password </label>
-        <input
-          className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          className="w-[100px] bg-blue-500 rounded-md px-2 py-1 hover:bg-blue-600 active:bg-blue-800 transition mt-3 font-josefin"
-          onClick={handleRegister}
-        >
-          Register
-        </button>
+      <div className="flex flex-col items-center justify-center bg-white shadow-lg rounded-3xl p-10">
+        <h1 className="text-[40px] font-josefin text-blue-500">Register an account</h1>
+        <div className="flex flex-col items-center justify-center mt-5 w-[200px] gap-y-1">
+          <label className="text-[20px] font-josefin font-semibold">
+            First Name{" "}
+          </label>
+          <input
+            className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label className="text-[20px] font-josefin font-semibold">
+            Last Name{" "}
+          </label>
+          <input
+            className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+            name="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <label className="text-[20px] font-josefin font-semibold">
+            Email{" "}
+          </label>
+          <input
+            className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="text-[20px] font-josefin font-semibold">
+            Password{" "}
+          </label>
+          <input
+            className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="w-[100px] bg-blue-500 rounded-md px-2 py-1 hover:bg-blue-600 active:bg-blue-800 transition mt-3 font-josefin text-white"
+            onClick={handleRegister}
+          >
+            Register
+          </button>
+        </div>
       </div>
     </div>
   );

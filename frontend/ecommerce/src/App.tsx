@@ -16,7 +16,7 @@ import { Toaster } from "sonner";
 function App() {
   return (
     <div className="relative min-h-screen w-full">
-      <div className="absolute inset-0 bg-[url('assets/laptops.jpg')] bg-[size:500px] bg-repeat opacity-15 filter grayscale "></div>
+      <div className="absolute inset-0 bg-[url('assets/laptops.jpg')] bg-[size:500px] bg-repeat opacity-15 filter grayscale blur-[2px]"></div>
       <div className="relative z-10">
         <AuthProvider>
           <CartProvider>
