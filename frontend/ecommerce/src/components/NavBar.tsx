@@ -56,21 +56,21 @@ export default function NavBar() {
     <div className="w-[100%] bg-blue-500 flex shadow-xl items-center mb-10">
       <div onClick={handleHome} className="flex items-center ml-6 py-4 gap-x-4 cursor-pointer">
         <NavBarIcon className="size-10" />
-        <div className="text-xl font-mono text-white">Tech Hub</div>
+        <div className="text-xl font-orbitron tracking-widest text-white font-extrabold">Tech Hub</div>
       </div>
       {token ? (
         <div className="flex ml-auto gap-x-5 items-center">
-          <h2 className="text-white cursor-default">{firstName}</h2>
+          <h2 className="text-white cursor-default font-josefin font-extrabold">Welcome {firstName}</h2>
           <ShoppingCartIcon
             onClick={handleCart}
             className="size-7 cursor-pointer text-white hover:text-slate-300 transition"
           />
-          <button onClick={handleOrders} className="bg-white ml-auto px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg">
+          <button onClick={handleOrders} className="bg-white ml-auto px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold">
             My orders
           </button>
           <button
             onClick={handleLogout}
-            className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg"
+            className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold"
           >
             Logout
           </button>
@@ -78,7 +78,7 @@ export default function NavBar() {
       ) : (
         <button
           onClick={handleLogin}
-          className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg"
+          className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold"
         >
           Login
         </button>

@@ -55,7 +55,7 @@ export default function CheckOutPage() {
   }
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10 pb-20 ">
+    <div className=" flex flex-col justify-center items-center gap-10 pb-20 font-josefin">
       <div className="border-2 rounded-lg w-[40%] ">
         {cartItems.map((item) => (
           <div className=" w-[100%] px-10 py-4 flex items-center bg-white">
@@ -71,8 +71,8 @@ export default function CheckOutPage() {
       </div>
       
         
-      <div className="w-[40%] pl-5 flex">
-        <h1 className="mr-auto text-[20px]">Total Amount: {totalAmount} EGP</h1>
+      <div className="text-[20px] bg-white rounded-lg px-4 py-4 shadow-md font-extrabold mr-[25%]">
+        <h1 className="mr-auto text-[20px] font-extrabold">Total Amount: <span className="font-normal">{totalAmount} EGP</span></h1>
       </div>
         <input
           placeholder="enter your address"

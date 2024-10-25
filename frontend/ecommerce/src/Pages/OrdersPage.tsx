@@ -49,7 +49,7 @@ export default function OrdersPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center pb-10 ">
+    <div className="flex flex-col items-center pb-10 font-josefin">
 
       {orders.length === 0 && (
         <div className="flex flex-col w-[100%] justify-center items-center mt-[17%] gap-5">
@@ -88,9 +88,9 @@ export default function OrdersPage() {
             )}
           </div>
           <hr className="py-3"></hr>
-          <div className="flex flex-col w-[100%]">
-            <p className="text-[20px]">Address: {order.address}</p>
-            <p className="text-[20px]">Total: {order.total} EGP</p>
+          <div className="flex flex-col w-[100%] font-extrabold">
+            <p className="text-[20px]">Address: <span className="font-normal">{order.address}</span></p>
+            <p className="text-[20px]">Total: <span className="font-normal">{order.total} EGP</span></p>
           </div>
         </div>
       ))}

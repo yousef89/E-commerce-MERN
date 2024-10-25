@@ -47,30 +47,30 @@ export default function Register() {
 
   return (
     <div className="flex flex-col items-center justify-center pt-[8%]">
-      <h1 className="text-[40px]">Register new user</h1>
+      <h1 className="text-[40px] font-josefin">Register new user</h1>
       <div className="flex flex-col items-center justify-center mt-9 w-[200px] gap-y-1">
-        <label className="text-[20px]">First Name </label>
+        <label className="text-[20px] font-josefin font-semibold">First Name </label>
         <input
           className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-        <label className="text-[20px]">Last Name </label>
+        <label className="text-[20px] font-josefin font-semibold">Last Name </label>
         <input
           className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
           name="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-        <label className="text-[20px]">Email </label>
+        <label className="text-[20px] font-josefin font-semibold">Email </label>
         <input
           className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label className="text-[20px]">Password </label>
+        <label className="text-[20px] font-josefin font-semibold">Password </label>
         <input
           className="w-full text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
           type="password"
@@ -79,7 +79,7 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          className="w-[100px] bg-blue-500 rounded-md px-2 py-1 hover:bg-blue-600 active:bg-blue-800 transition mt-3"
+          className="w-[100px] bg-blue-500 rounded-md px-2 py-1 hover:bg-blue-600 active:bg-blue-800 transition mt-3 font-josefin"
           onClick={handleRegister}
         >
           Register
