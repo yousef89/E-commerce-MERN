@@ -29,7 +29,7 @@ export default function Register() {
 
       if (!response.ok) {
         const data = await response.json();
-        toast.error(data.message || "Registration failed", {
+        toast.error(data.message || "User already exists", {
           className: "bg-red-500 text-white border border-red-600",
         });
         return;
@@ -47,7 +47,7 @@ export default function Register() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center pt-[8%]">
+    <div className="flex flex-col items-center justify-center pt-[5%]">
       <div className="flex flex-col items-center justify-center bg-white shadow-lg rounded-3xl p-10">
         <h1 className="text-[40px] font-josefin text-blue-500">Register an account</h1>
         <Formik
