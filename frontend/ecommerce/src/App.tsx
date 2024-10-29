@@ -16,7 +16,7 @@ import { Toaster } from "sonner";
 function App() {
   return (
     <div className="relative min-h-screen w-full">
-      <div className="absolute inset-0 bg-[url('assets/laptops.jpg')] bg-[size:500px] bg-repeat opacity-15 filter grayscale blur-[2px]"></div>
+      <div className="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/gaming-computer-device-seamless-pattern_1284-51634.jpg?t=st=1730193670~exp=1730197270~hmac=8ecaca161c863870a954520bbabfe86dd0532715f8b42438a32c9317c37468c8&w=1380')] bg-[size:500px] bg-repeat opacity-15 filter grayscale blur-[2px]"></div>
       <div className="relative z-10">
         <AuthProvider>
           <CartProvider>
