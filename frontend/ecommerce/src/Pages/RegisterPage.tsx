@@ -47,9 +47,9 @@ export default function Register() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center pt-[5%]">
+    <div className="flex flex-col items-center justify-center pt-[5%] ">
       <div className="flex flex-col items-center justify-center bg-white shadow-lg rounded-3xl p-10">
-        <h1 className="text-[40px] font-josefin text-blue-500">Register an account</h1>
+        <h1 className="text-[40px] font-josefin text-blue-500 mobile:text-[30px]">Register an account</h1>
         <Formik
           initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
           validationSchema={validationSchema}

@@ -8,8 +8,8 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 export default function CheckOutPage() {
   const { cartItems, totalAmount, fetchData } = useCart();
   const [address, setAddress] = useState("");
-  const [errorMessage , setErrorMessage] = useState("");
-  const {token} = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function CheckOutPage() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          address
+          address,
         }),
       });
 
@@ -55,13 +55,15 @@ export default function CheckOutPage() {
   }
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-10 pb-20 font-josefin">
-      <div className="border-2 rounded-lg w-[40%] ">
+    <div className=" flex flex-col justify-center items-center gap-7 pb-20 font-josefin">
+      <div className="border-2 rounded-lg ">
         {cartItems.map((item) => (
-          <div className=" w-[100%] px-10 py-4 flex items-center bg-white">
-            <img src={item.productImage} className="w-28"></img>
-            <h2 className="text-[20px] pl-5">{item.title}</h2>
-            <div className="flex items-center ml-auto pr-4">
+          <div className=" py-4 px-3 flex items-center bg-white">
+            <div className="flex items-center mr-auto">
+              <img src={item.productImage} className="w-28"></img>
+              <h2 className="text-[20px] pl-5 ">{item.title}</h2>
+            </div>
+            <div className="flex items-center ml-20">
               <h3>
                 {item.quantity} x {item.unitPrice} EGP
               </h3>
@@ -69,20 +71,26 @@ export default function CheckOutPage() {
           </div>
         ))}
       </div>
-      
-        
-      <div className="text-[20px] bg-white rounded-lg px-4 py-4 shadow-md font-extrabold mr-[25%]">
-        <h1 className="mr-auto text-[20px] font-extrabold">Total Amount: <span className="font-normal">{totalAmount} EGP</span></h1>
+
+      <div className="text-[20px] bg-white rounded-lg px-4 py-4 shadow-md font-extrabold ">
+        <h1 className="mr-auto text-[20px] font-extrabold">
+          Total Amount: <span className="font-normal">{totalAmount} EGP</span>
+        </h1>
       </div>
-        <input
-          placeholder="enter your address"
-          className=" w-[40%] text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
-          name="firstName"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <button onClick={handlePayment} className="text-white text-[20px] w-[90px] h-[30px] bg-blue-500 rounded-lg hover:bg-blue-600 transition">Pay now</button>
-        {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
+      <input
+        placeholder="enter your address"
+        className=" w-[40%] text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+        name="firstName"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <button
+        onClick={handlePayment}
+        className="text-white text-[20px] w-[90px] h-[30px] bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+      >
+        Pay now
+      </button>
+      {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );
 }

@@ -54,14 +54,14 @@ export default function OrdersPage() {
       {orders.length === 0 && (
         <div className="flex flex-col w-[100%] justify-center items-center mt-[17%] gap-5">
           <EmptyCartLogo width={100} height={100}></EmptyCartLogo>
-          <p className="text-[25px]">Add items to review your orders</p>
+          <p className="text-[22px]">Add items to review your orders</p>
         </div>
       )}
 
       {orders.map((order) => (
         <div
           key={order._id}
-          className="border-2 rounded-lg w-[40%] p-5 bg-white shadow-md mb-10"
+          className="border-2 rounded-lg  p-5 bg-white shadow-md mb-10"
         >
           <div className="py-3">
             {order.orderItems.length > 0 ? (

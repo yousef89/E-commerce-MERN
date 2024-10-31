@@ -16,6 +16,9 @@ export default {
 		dangrek: ['Dangrek', 'sans-serif'],
 		josefin: ['Josefin Sans', 'sans-serif'],
       },
+      screens: {
+        'mobile': '375px',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

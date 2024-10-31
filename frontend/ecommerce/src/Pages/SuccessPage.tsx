@@ -10,7 +10,7 @@ export default function SuccessPage() {
     <div>
       <div className="flex flex-col items-center justify-center mt-[17%] gap-5 font-josefin">
         <SuccessLogo width={100} height={100}></SuccessLogo>
-        <h1 className="text-[30px]">Your order has been successfully submitted</h1>
+        <h1 className="text-[30px] text-center">Your order has been successfully submitted</h1>
       </div>
     </div>
   );

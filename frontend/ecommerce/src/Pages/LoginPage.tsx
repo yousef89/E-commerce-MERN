@@ -56,9 +56,9 @@ export default function Login() {
   return (
     <div className="flex flex-col items-center justify-center pt-[10%]">
       <div className="flex flex-col items-center justify-center bg-white  shadow-lg rounded-3xl p-10">
-        <h1 className="text-[40px] font-josefin text-blue-500">Login to your account</h1>
+        <h1 className="text-[40px] font-josefin text-blue-500 mobile:text-[29px]">Login to your account</h1>
         <div className="flex flex-col items-center justify-center mt-5 w-[200px] gap-y-1">
-          <label className="text-[20px] font-josefin font-semibold">
+          <label className="text-[20px] font-josefin font-semibold mr-auto">
             Email{" "}
           </label>
           <input
@@ -67,7 +67,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label className="text-[20px] font-josefin font-semibold">
+          <label className="text-[20px] font-josefin font-semibold mr-auto">
             Password{" "}
           </label>
           <input

@@ -8,11 +8,11 @@ import { useEffect, useState } from "react";
 export default function NavBar() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
-  
+
   interface CustomJwtPayload {
     firstName: string;
   }
-  
+
   const [firstName, setFirstName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -53,27 +53,39 @@ export default function NavBar() {
   }
 
   return (
-    <div className="w-[100%] bg-blue-500 flex shadow-xl items-center mb-10">
-      <div onClick={handleHome} className="flex items-center ml-6 py-4 gap-x-4 cursor-pointer">
-        <NavBarIcon className="size-10" />
-        <div className="text-xl font-orbitron tracking-widest text-white font-extrabold">Tech Hub</div>
+    <div className="w-full bg-blue-500 flex shadow-xl items-center mb-10">
+      <div
+        onClick={handleHome}
+        className="flex items-center ml-4 py-6 gap-x-4 cursor-pointer"
+      >
+        <NavBarIcon className="size-6" />
+        <div className="text-[13px] font-orbitron tracking-widest text-white font-extrabold text-nowrap">
+          Tech Hub
+        </div>
       </div>
       {token ? (
-        <div className="flex ml-auto gap-x-5 items-center">
-          <h2 className="text-white cursor-default font-josefin font-extrabold">Welcome {firstName}</h2>
+        <div className="flex ml-auto gap-x-3 items-center justify-center">
+          <h1 className="font-josefin text-white">Welcome</h1>
           <ShoppingCartIcon
             onClick={handleCart}
             className="size-7 cursor-pointer text-white hover:text-slate-300 transition"
           />
-          <button onClick={handleOrders} className="bg-white ml-auto px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold">
-            My orders
-          </button>
-          <button
-            onClick={handleLogout}
-            className="bg-white ml-auto mr-7 px-4 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold"
-          >
-            Logout
-          </button>
+          <div className="flex flex-col ml-auto w-[90px] gap-y-1 mr-2">
+            {" "}
+            {/* Vertical stacking with gap */}
+            <button
+              onClick={handleOrders}
+              className="w-full bg-white text-[12px] px-1 py-1 mobile:text-[12px] rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold"
+            >
+              My orders
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-white text-[12px] px-1 py-1 rounded-lg hover:bg-slate-200 transition shadow-lg font-josefin font-semibold"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       ) : (
         <button
