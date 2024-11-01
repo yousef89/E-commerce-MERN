@@ -135,7 +135,7 @@ export default function CartProvider({ children }: CartProviderType) {
       });
 
       if (!response.ok) {
-        toast.error("Faild to update to cart", {
+        toast.error("Item is low in stock", {
           className: "bg-red-500 text-white border border-red-600",
         });
         return;

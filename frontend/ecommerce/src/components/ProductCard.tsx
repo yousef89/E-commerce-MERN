@@ -11,8 +11,8 @@ export default function ProductCard({
   const { addToCart } = useCart();
   return (
     <div className=" shadow-lg px-4 flex flex-col justify-center items-center bg-white transition rounded-xl font-josefin">
-      <img src={image} className="w-40 mt-auto pt-5"></img>
-      <div className="flex items-center justify-center mr-auto w-[100%]">
+      <img src={image} className="w-40 pt-5 "></img>
+      <div className="flex items-center justify-center mr-auto w-[100%] PC:mt-auto">
         <div className="mr-auto mb-4 ml-4 mt-auto">
           <h1 className="text-[24px] font-bold pb-2">{title}</h1>
           <h3>{price} EGP</h3>

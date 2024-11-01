@@ -18,6 +18,8 @@ export default {
       },
       screens: {
         'mobile': '375px',
+        'tablet': '700px',
+        'PC': '1024px',
       },
     },
   },

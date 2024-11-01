@@ -61,7 +61,7 @@ export default function OrdersPage() {
       {orders.map((order) => (
         <div
           key={order._id}
-          className="border-2 rounded-lg  p-5 bg-white shadow-md mb-10"
+          className="border-2 rounded-lg  p-5 bg-white shadow-md mb-10 PC:w-[700px]"
         >
           <div className="py-3">
             {order.orderItems.length > 0 ? (

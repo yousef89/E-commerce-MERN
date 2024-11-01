@@ -58,7 +58,7 @@ export default function CheckOutPage() {
     <div className=" flex flex-col justify-center items-center gap-7 pb-20 font-josefin px-4">
       <div className="rounded-3xl shadow-md">
         {cartItems.map((item) => (
-          <div className=" py-4 px-3 flex items-center bg-white">
+          <div className=" py-4 px-3 flex items-center bg-white PC:w-[750px] PC:px-10">
             <div className="flex items-center mr-auto">
               <img src={item.productImage} className="w-28"></img>
               <h2 className="text-[20px] pl-5 ">{item.title}</h2>
@@ -79,7 +79,7 @@ export default function CheckOutPage() {
       </div>
       <input
         placeholder="enter your address"
-        className=" w-[40%] text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition"
+        className=" w-[40%] text-center shadow-md border-2 border-gray-400 rounded-md hover:border-blue-400 transition PC:max-w-[500px]"
         name="firstName"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
