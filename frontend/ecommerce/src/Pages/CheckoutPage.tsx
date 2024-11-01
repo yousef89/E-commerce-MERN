@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/cartContext";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function CheckOutPage() {
   const { cartItems, totalAmount, fetchData } = useCart();
   const [address, setAddress] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -19,12 +20,13 @@ export default function CheckOutPage() {
   async function handlePayment() {
     try {
       if (!address) {
-        setErrorMessage(`please enter your address`);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error("Please enter your address", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
+
+      setLoading(true);
       const response = await fetch(`${baseUrl}/cart/checkout`, {
         method: "POST",
         headers: {
@@ -37,20 +39,18 @@ export default function CheckOutPage() {
       });
 
       if (!response.ok) {
-        setErrorMessage("something went wrong in payment process!");
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 3000);
+        toast.error("Something went wrong in payment process", {
+          className: "bg-red-500 text-white border border-red-600",
+        });
         return;
       }
-      setErrorMessage("");
       navigate("/success");
     } catch (error) {
       console.log(error);
-      setErrorMessage("something went wrong in payment process!");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
+      toast.error("Something went wrong in payment process", {
+        className: "bg-red-500 text-white border border-red-600",
+      });
+      setLoading(false);
     }
   }
 
@@ -86,11 +86,11 @@ export default function CheckOutPage() {
       />
       <button
         onClick={handlePayment}
-        className="text-white text-[20px] w-[90px] h-[30px] bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+        className="text-white text-[20px] w-[110px] h-[30px] bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+        disabled= {loading}
       >
-        Pay now
+        {loading ? "Processing...": "Pay now"}
       </button>
-      {errorMessage && <h1 className="text-red-500 mt-2">{errorMessage}</h1>}
     </div>
   );
 }
