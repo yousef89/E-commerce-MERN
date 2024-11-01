@@ -55,8 +55,8 @@ export default function CheckOutPage() {
   }
 
   return (
-    <div className=" flex flex-col justify-center items-center gap-7 pb-20 font-josefin">
-      <div className="border-2 rounded-lg ">
+    <div className=" flex flex-col justify-center items-center gap-7 pb-20 font-josefin px-4">
+      <div className="rounded-3xl shadow-md">
         {cartItems.map((item) => (
           <div className=" py-4 px-3 flex items-center bg-white">
             <div className="flex items-center mr-auto">

@@ -24,7 +24,7 @@ export default function HomePage() {
     getProducts();
   }, []);
   return (
-      <div className="grid grid-cols-4 gap-10 m-5 mobile:grid-cols-1">
+      <div className="grid grid-cols-1 gap-10 m-5 ">
         {product.map((p)=>(
             <ProductCard _id = {p._id} image = {p.image} price = {p.price} stock = {p.stock} title = {p.title}></ProductCard>
         ))}    

@@ -11,8 +11,8 @@ export default function ProductCard({
   const { addToCart } = useCart();
   return (
     <div className=" shadow-lg px-4 flex flex-col justify-center items-center bg-white transition rounded-xl font-josefin">
-      <img src={image} className="w-40 mt-auto"></img>
-      <div className="flex items-center justify-center mr-auto w-[100%] mt-auto">
+      <img src={image} className="w-40 mt-auto pt-5"></img>
+      <div className="flex items-center justify-center mr-auto w-[100%]">
         <div className="mr-auto mb-4 ml-4 mt-auto">
           <h1 className="text-[24px] font-bold pb-2">{title}</h1>
           <h3>{price} EGP</h3>
@@ -20,7 +20,7 @@ export default function ProductCard({
         </div>
         <button
           onClick={() => addToCart(_id)}
-          className="bg-blue-500 rounded-md px-2 py-1 hover:bg-blue-600 active:bg-blue-800 transition ml-auto mt-10 mr-4 text-white"
+          className="bg-blue-500 rounded-md px-2 py-1 text-nowrap hover:bg-blue-600 active:bg-blue-800 transition ml-auto mt-10 mr-4 text-white "
         >
           add to cart
         </button>

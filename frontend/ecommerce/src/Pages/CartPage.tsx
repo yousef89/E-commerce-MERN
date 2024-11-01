@@ -43,22 +43,22 @@ export default function CartPage() {
           <img src={item.productImage} className="w-24"></img>
           <div className="flex flex-col pl-5">
             <h2 className="text-[18px]">{item.title}</h2>
-            <h3>
+            <h3 className="text-[12px]">
               {item.quantity} x {item.unitPrice} EGP
             </h3>
           </div>
           <div className="flex flex-col pl-[20px] gap-2 items-center justify-center">
             <button
-              onClick={() => handleQuantity(item.productId, item.quantity - 1)}
-              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md hover:bg-blue-600 transition text-[20px]"
-            >
-              -
-            </button>
-            <button
               onClick={() => handleQuantity(item.productId, item.quantity + 1)}
               className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md hover:bg-blue-600 transition text-[20px]"
             >
               +
+            </button>
+            <button
+              onClick={() => handleQuantity(item.productId, item.quantity - 1)}
+              className="text-white h-7 w-7 bg-blue-500 flex items-center justify-center rounded-md hover:bg-blue-600 transition text-[20px]"
+            >
+              -
             </button>
 
             <button onClick={() => handleRemoveItem(item.productId)}>

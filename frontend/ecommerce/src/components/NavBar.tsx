@@ -56,10 +56,10 @@ export default function NavBar() {
     <div className="w-full bg-blue-500 flex shadow-xl items-center mb-10">
       <div
         onClick={handleHome}
-        className="flex items-center ml-4 py-6 gap-x-4 cursor-pointer"
+        className="flex items-center ml-4 py-6 gap-x-2 cursor-pointer"
       >
         <NavBarIcon className="size-6" />
-        <div className="text-[13px] font-orbitron tracking-widest text-white font-extrabold text-nowrap">
+        <div className="text-[15px] font-orbitron tracking-widest text-white font-extrabold text-nowrap">
           Tech Hub
         </div>
       </div>
